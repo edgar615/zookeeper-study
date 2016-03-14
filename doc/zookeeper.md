@@ -197,3 +197,30 @@ exists A znode is created or deleted, or its data is updated
 getChildren A child of a znode is created or deleted, or the znode itself is deleted
 
 getData A znode is deleted or its data is updated
+
+`
+stat /foo0000000000
+cZxid = 0x2
+ctime = Mon Mar 14 21:54:44 CST 2016
+mZxid = 0x2
+mtime = Mon Mar 14 21:54:44 CST 2016
+pZxid = 0x2
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x1000003794f0000
+dataLength = 0
+numChildren = 0
+`
+
+- cZxid : This is the transaction ID of the change that caused this znode to be created.
+- mZxid : This is the transaction ID of the change that last modified this znode.
+- pZxid : This is the transaction ID for a znode change that pertains to adding or removing children.
+- ctime : This denotes the creation time of a znode in milliseconds from epoch.
+- mtime : This denotes the last modification time of a znode in milliseconds from epoch.
+- dataVersion : This denotes the number of changes made to the data of this znode.
+- cversion : This denotes the number of changes made to the children of this znode.
+- aclVersion : This denotes the number of changes made to the ACL of this znode.
+- ephemeralOwner : This is the session ID of the znode's owner if the znode is an ephemeral node. If the znode is not an ephemeral node, this field is set to zero.
+- dataLength : This is the length of the data field of this znode.
+- numChildren : This denotes the number of children of this znode.
