@@ -198,6 +198,34 @@ getChildren A child of a znode is created or deleted, or the znode itself is del
 
 getData A znode is deleted or its data is updated
 
+ZooKeeper provides the following built-in authentication mechanisms based
+on ACLs:
+- World: This represents anyone who is connecting to the ZooKeeper service
+- Auth: This represents any authenticated user, but doesn't use any ID
+- Digest: This represents the username and password way of authentication
+- IP address: This represents authentication with the IP address of the client
+
+ZooKeeper's ACLs support the following permissions:
+
+CREATE Creates a child znode
+READ Gets a list of child znodes and the data associated with a znode
+WRITE Sets (writes) data to a znode
+DELETE Deletes a child znode
+ADMIN Sets ACLs (permissions)
+
+Any client that is connecting to a ZooKeeper service has the permission to check
+the existence of a znode. This exist operation is permission-free, which allows
+to retrieve the stat structure of a znode
+
+There are a number of predefined ACLs in ZooKeeper. These IDs, as defined by
+ZooKeeper ACLs, are shown in the following table:
+
+ANYONE_ID_UNSAFE This ID represents anyone
+AUTH_IDS This is used to set ACLs, which get substituted with the IDs of the authenticated client
+OPEN_ACL_UNSAFE This denotes a completely open ACL, and grants all permissions except the ADMIN permission
+CREATOR_ALL_ACL This ACL grants all the permissions to the creator of the znode
+READ_ACL_UNSAFE This ACL gives the world the ability to read
+
 `
 stat /foo0000000000
 cZxid = 0x2
