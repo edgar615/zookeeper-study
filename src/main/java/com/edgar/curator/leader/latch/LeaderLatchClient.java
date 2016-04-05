@@ -3,6 +3,7 @@ package com.edgar.curator.leader.latch;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.leader.LeaderLatch;
+import org.apache.curator.framework.recipes.leader.LeaderLatchListener;
 import org.apache.curator.retry.RetryOneTime;
 
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,17 @@ public class LeaderLatchClient {
 //    latchPath - the path for this leadership group
 //    id - participant ID
     leaderLatch = new LeaderLatch(client, path, name);
-//    leaderLatch.addListener();
+    leaderLatch.addListener(new LeaderLatchListener() {
+      @Override
+      public void isLeader() {
+        System.out.println(name + " is leader");
+      }
+
+      @Override
+      public void notLeader() {
+        System.out.println(name + " not leader");
+      }
+    });
   }
 
   public void start() throws Exception {
