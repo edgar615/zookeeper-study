@@ -47,3 +47,9 @@ created the child znode. To resolve such a situation, the client can store its s
 in the znode data field or even as a part of the znode name itself. As a client retains
 the same session ID after a reconnect, it can easily determine whether the child znode
 was created by it by looking at the session ID.
+
+锁服务可以分为两类，一个是保持独占，另一个是控制时序。
+
+对于第一类，我们将zookeeper上的一个znode看作是一把锁，通过createznode的方式来实现。所有客户端都去创建 /distribute_lock 节点，最终成功创建的那个客户端也即拥有了这把锁。厕所有言：来也冲冲，去也冲冲，用完删除掉自己创建的distribute_lock 节点就释放出锁。
+
+对于第二类， /distribute_lock 已经预先存在，所有客户端在它下面创建临时顺序编号目录节点，和leader选举一样，编号最小的获得锁，用完删除，依次获得锁。

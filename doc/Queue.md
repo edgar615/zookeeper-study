@@ -27,3 +27,11 @@ item. In such scenarios, the client should retry the delete call.
 Using this algorithm for implementation of a generic queue, we can also build
 a priority queue out of it, where each item can have a priority tagged to it. The
 algorithm and implementation is left as an exercise to the readers.
+
+1、 同步队列，当一个队列的成员都聚齐时，这个队列才可用，否则一直等待所有成员到达。
+
+2、队列按照 FIFO 方式进行入队和出队操作。
+
+第一类，在约定目录下创建临时目录节点，监听节点数目是否是我们要求的数目。
+
+第二类，和分布式锁服务中的控制时序场景基本原理一致，入列有编号，出列按编号。
